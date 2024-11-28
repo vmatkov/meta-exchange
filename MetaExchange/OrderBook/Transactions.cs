@@ -34,6 +34,13 @@ namespace MetaExchange.OrderBook
                 if(temp != null) OrderBooks.Add(temp);
             }
 
+            for (var i = 0; i < OrderBooks.Count; i++)
+            {
+                var orderBook = OrderBooks[i];
+                orderBook.Asks = orderBook.Asks.OrderBy(o => o.Order?.Price).ToList();
+                orderBook.Bids = orderBook.Bids.OrderByDescending(o => o.Order?.Price).ToList();
+            }
+
             for(var i = 0; i < OrderBooks.Count; i++) CryptoExchanges.Add(new() { OrderBook = OrderBooks[i] });
         }
     }
