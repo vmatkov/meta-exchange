@@ -9,16 +9,16 @@ namespace MetaExchange.OrderBook
     public class CryptoExchange
     {
         public OrderBook   OrderBook   { get; set; }
-        public double      EurBalance  { get; set; }
-        public double      BtcBalance  { get; set; }
+        public decimal     EurBalance  { get; set; }
+        public decimal     BtcBalance  { get; set; }
         public CryptoExchange() 
         { 
             OrderBook = new OrderBook();
 
             // Generate balance constraint
             Random random = new Random();
-            EurBalance = random.NextDouble() * 10000;   // returns numbers between 0 - 10.000
-            BtcBalance = random.NextDouble() * 100;     // returns numbers between 0 - 100
+            EurBalance = (decimal)random.NextDouble() * 10000;   // returns numbers between 0 - 10.000
+            BtcBalance = (decimal)random.NextDouble() * 100;     // returns numbers between 0 - 100
         }
     }
 }

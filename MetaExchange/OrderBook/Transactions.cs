@@ -51,9 +51,9 @@ namespace MetaExchange.OrderBook
             }
         }
 
-        public List<(string ExchangeName, double Price, double Amount)> GetBestTrades(string type, double amount)
+        public List<(string ExchangeName, decimal Price, decimal Amount)> GetBestTrades(string type, decimal amount)
         {
-            var result = new List<(string ExchangeName, double Price, double Amount)>();
+            var result = new List<(string ExchangeName, decimal Price, decimal Amount)>();
             var remainingAmount = amount;
 
             if(type.ToUpper() == "BUY")
@@ -73,23 +73,21 @@ namespace MetaExchange.OrderBook
 
                     for (var i = 0; i < allAsks.Count; i++)
                     {
+                        var ask = allAsks[i];
                         if (remainingAmount <= 0) break;
-                        double buyingAmount = Math.Min(remainingAmount, allAsks[i].AvailableBtc);
+                        decimal affordableAmount = Math.Floor((ask.Exchange.EurBalance / (ask.Price / ask.AvailableBtc)) * 1000) / 1000;
+                        remainingAmount = Math.Round(remainingAmount, 3, MidpointRounding.AwayFromZero);
+                        decimal buyingAmount = Math.Min(remainingAmount, affordableAmount);
 
-                        if(buyingAmount > 0)
+                        if (buyingAmount > 0 && ask.Exchange.EurBalance > 0)
                         {
-                            var affordable = (allAsks[i].Exchange.EurBalance / remainingAmount) >= (allAsks[i].Price / allAsks[i].AvailableBtc);
-                            if (affordable)
-                            {
-                                result.Add((allAsks[i].ExchangeName, (allAsks[i].Price / allAsks[i].AvailableBtc) * buyingAmount, buyingAmount));
-                                allAsks[i].Exchange.EurBalance -= (allAsks[i].Price / allAsks[i].AvailableBtc) * buyingAmount;
-                                remainingAmount -= buyingAmount;
-                            }
-                            else continue;
+                            result.Add((ask.ExchangeName, Math.Round((ask.Price / ask.AvailableBtc) * buyingAmount, 3, MidpointRounding.AwayFromZero), buyingAmount));
+                            ask.Exchange.EurBalance -= (ask.Price / ask.AvailableBtc) * buyingAmount;
+                            remainingAmount -= buyingAmount;
                         }
                     }
 
-                    if(remainingAmount > 0)
+                    if (remainingAmount > 0)
                     {
                         Console.WriteLine($"You could only purchase {amount - remainingAmount} in the currect constraint.");
                     }
@@ -129,9 +127,9 @@ namespace MetaExchange.OrderBook
             return result;
         }
 
-        public List<(string ExchangeName, double Price, double Amount)> GetBestTrades(string type, double amount, List<(double, double)> predefinedBalances)
+        public List<(string ExchangeName, decimal Price, decimal Amount)> GetBestTrades(string type, decimal amount, List<(decimal, decimal)> predefinedBalances)
         {
-            var result = new List<(string ExchangeName, double Price, double Amount)>();
+            var result = new List<(string ExchangeName, decimal Price, decimal Amount)>();
             var remainingAmount = amount;
 
             if (type.ToUpper() == "BUY")
@@ -162,18 +160,15 @@ namespace MetaExchange.OrderBook
                     {
                         var ask = allAsks[i];
                         if (remainingAmount <= 0) break;
-                        double buyingAmount = Math.Min(remainingAmount, ask.AvailableBtc);
+                        decimal affordableAmount = Math.Floor((ask.Exchange.EurBalance / (ask.Price / ask.AvailableBtc)) * 1000) / 1000;
+                        remainingAmount = Math.Round(remainingAmount, 3, MidpointRounding.AwayFromZero);
+                        decimal buyingAmount = Math.Min(remainingAmount, affordableAmount);
 
-                        if (buyingAmount > 0)
+                        if (buyingAmount > 0 && ask.Exchange.EurBalance > 0)
                         {
-                            var affordable = (ask.Exchange.EurBalance / remainingAmount) >= (ask.Price / ask.AvailableBtc);
-                            if (affordable)
-                            {
-                                result.Add((ask.ExchangeName, (ask.Price / ask.AvailableBtc) * buyingAmount, buyingAmount));
-                                ask.Exchange.EurBalance -= (ask.Price / ask.AvailableBtc) * buyingAmount;
-                                remainingAmount -= buyingAmount;
-                            }
-                            else continue;
+                            result.Add((ask.ExchangeName, Math.Round((ask.Price / ask.AvailableBtc) * buyingAmount, 3, MidpointRounding.AwayFromZero), buyingAmount));
+                            ask.Exchange.EurBalance -= (ask.Price / ask.AvailableBtc) * buyingAmount;
+                            remainingAmount -= buyingAmount;
                         }
                     }
 

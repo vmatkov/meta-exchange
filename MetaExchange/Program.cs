@@ -1,5 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using MetaExchange.OrderBook;
+using System;
 
 #region BUYING TESTS
 Console.WriteLine("--- BUYING TESTS ---");
@@ -11,9 +12,9 @@ string inputFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Inpu
 // Init CryptoExchanges and OrderBooks
 Transactions transactions = new(inputFilePath);
 // Init test EUR Balances
-List<(double, double)> predefinedBalances = new() { (190, 0), (112.5, 0), (249, 0) };
+List<(decimal, decimal)> predefinedBalances = new() { (190, 0), (112.5m, 0), (249, 0) };
 // call function
-var bestTrades = transactions.GetBestTrades("buy", 4.20, predefinedBalances);
+var bestTrades = transactions.GetBestTrades("buy", 4.20m, predefinedBalances);
 // write out trades
 if (bestTrades.Count > 0)
 {
@@ -36,7 +37,7 @@ transactions = new(inputFilePath);
 // Init test EUR Balances
 predefinedBalances = new() { (190, 0), (650, 0), (249, 0) };
 // call function
-bestTrades = transactions.GetBestTrades("buy", 4.20, predefinedBalances);
+bestTrades = transactions.GetBestTrades("buy", 4.20m, predefinedBalances);
 // write out trades
 if (bestTrades.Count > 0)
 {
@@ -57,9 +58,9 @@ inputFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Input", "te
 // Init CryptoExchanges and OrderBooks
 transactions = new(inputFilePath);
 // Init test EUR Balances
-predefinedBalances = new() { (190, 0), (650, 0), (249, 0) };
+predefinedBalances = new() { (190, 0), (500, 0), (249, 0) };
 // call function
-bestTrades = transactions.GetBestTrades("buy", 4.20, predefinedBalances);
+bestTrades = transactions.GetBestTrades("buy", 4.20m, predefinedBalances);
 // write out trades
 if (bestTrades.Count > 0)
 {
@@ -106,9 +107,9 @@ inputFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Input", "te
 // Init CryptoExchanges and OrderBooks
 transactions = new(inputFilePath);
 // Init test EUR Balances
-predefinedBalances = new() { (190, 1.5), (112.5, 2), (249, 0) };
+predefinedBalances = new() { (190, 1.5m), (112.5m, 2), (249, 0) };
 // call function
-bestTrades = transactions.GetBestTrades("sell", 1.5, predefinedBalances);
+bestTrades = transactions.GetBestTrades("sell", 1.5m, predefinedBalances);
 // write out trades
 if (bestTrades.Count > 0)
 {

@@ -6,7 +6,7 @@
         public string Time      { get; set; } = string.Empty;
         public string Type      { get; set; } = string.Empty;
         public string Kind      { get; set; } = string.Empty;
-        public double Amount    { get; set; }
-        public double Price     { get; set; }
+        public decimal Amount   { get; set; }
+        public decimal Price    { get; set; }
     }
 }
