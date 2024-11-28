@@ -132,4 +132,30 @@ Console.WriteLine("--- END TEST 1 ---");
 Console.WriteLine("--- SELLING TESTS ---");
 #endregion
 
+
+Console.WriteLine("--- RANDOM TEST ---");
+inputFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Input", "order_books_data.json");
+transactions = new(inputFilePath);
+Console.WriteLine("--- SELLING ---");
+bestTrades = transactions.GetBestTrades("sell", 0.0002m);
+if (bestTrades.Count > 0)
+{
+    for (int i = 0; i < bestTrades.Count; i++)
+    {
+        Console.WriteLine(string.Concat("Exchange Timestamp: ", bestTrades[i].ExchangeName, " Amount sold: ", bestTrades[i].Amount, " BTC for ", bestTrades[i].Price, " EUR."));
+    }
+}
+Console.WriteLine("--- SELLING ---");
+Console.WriteLine("--- BUYING ---");
+bestTrades = transactions.GetBestTrades("buy", 5.0m);
+if (bestTrades.Count > 0)
+{
+    for (int i = 0; i < bestTrades.Count; i++)
+    {
+        Console.WriteLine(string.Concat("Exchange Timestamp: ", bestTrades[i].ExchangeName, " Amount bought: ", bestTrades[i].Amount, " BTC for ", bestTrades[i].Price, " EUR."));
+    }
+}
+Console.WriteLine("--- BUYING ---");
+Console.WriteLine("--- RANDOM TEST ---");
+
 Console.ReadKey();
