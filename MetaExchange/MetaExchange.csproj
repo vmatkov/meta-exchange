@@ -3,9 +3,19 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net8.0</TargetFramework>
-    <RootNamespace>meta_exchange</RootNamespace>
+    <RootNamespace>MetaExchange</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Input\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Input\order_books_data.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 
 </Project>
