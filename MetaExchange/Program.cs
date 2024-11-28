@@ -1,6 +1,8 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using MetaExchange.OrderBook;
 
+#region BUYING TESTS
+Console.WriteLine("--- BUYING TESTS ---");
 #region TEST 1
 
 Console.WriteLine("--- START TEST 1 ---");
@@ -17,7 +19,7 @@ if (bestTrades.Count > 0)
 {
     for(int i = 0; i < bestTrades.Count; i++)
     {
-        Console.WriteLine(string.Concat("Exchange Timestamp: ", bestTrades[i].ExchangeName, " Amount bought: ", bestTrades[i].Amount, " for ", bestTrades[i].Price, " EUR."));
+        Console.WriteLine(string.Concat("Exchange Timestamp: ", bestTrades[i].ExchangeName, " Amount bought: ", bestTrades[i].Amount, " BTC for ", bestTrades[i].Price, " EUR."));
     }
 }
 Console.WriteLine("--- END TEST 1 ---");
@@ -40,7 +42,7 @@ if (bestTrades.Count > 0)
 {
     for (int i = 0; i < bestTrades.Count; i++)
     {
-        Console.WriteLine(string.Concat("Exchange Timestamp: ", bestTrades[i].ExchangeName, " Amount bought: ", bestTrades[i].Amount, " for ", bestTrades[i].Price, " EUR."));
+        Console.WriteLine(string.Concat("Exchange Timestamp: ", bestTrades[i].ExchangeName, " Amount bought: ", bestTrades[i].Amount, " BTC for ", bestTrades[i].Price, " EUR."));
     }
 }
 Console.WriteLine("--- END TEST 2 ---");
@@ -63,7 +65,7 @@ if (bestTrades.Count > 0)
 {
     for (int i = 0; i < bestTrades.Count; i++)
     {
-        Console.WriteLine(string.Concat("Exchange Timestamp: ", bestTrades[i].ExchangeName, " Amount bought: ", bestTrades[i].Amount, " for ", bestTrades[i].Price, " EUR."));
+        Console.WriteLine(string.Concat("Exchange Timestamp: ", bestTrades[i].ExchangeName, " Amount bought: ", bestTrades[i].Amount, " BTC for ", bestTrades[i].Price, " EUR."));
     }
 }
 Console.WriteLine("--- END TEST 3 ---");
@@ -86,11 +88,47 @@ if (bestTrades.Count > 0)
 {
     for (int i = 0; i < bestTrades.Count; i++)
     {
-        Console.WriteLine(string.Concat("Exchange Timestamp: ", bestTrades[i].ExchangeName, " Amount bought: ", bestTrades[i].Amount, " for ", bestTrades[i].Price, " EUR."));
+        Console.WriteLine(string.Concat("Exchange Timestamp: ", bestTrades[i].ExchangeName, " Amount bought: ", bestTrades[i].Amount, " BTC for ", bestTrades[i].Price, " EUR."));
     }
 }
 Console.WriteLine("--- END TEST 4 ---");
 
+#endregion
+Console.WriteLine("--- BUYING TESTS ---");
+#endregion
+
+#region SELLING TESTS
+Console.WriteLine("--- SELLING TESTS ---");
+#region TEST 1
+Console.WriteLine("--- START TEST 1 ---");
+// Get input file
+inputFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Input", "test1.json");
+// Init CryptoExchanges and OrderBooks
+transactions = new(inputFilePath);
+// Init test EUR Balances
+predefinedBalances = new() { (190, 1.5), (112.5, 2), (249, 0) };
+// call function
+bestTrades = transactions.GetBestTrades("sell", 1.5, predefinedBalances);
+// write out trades
+if (bestTrades.Count > 0)
+{
+    for (int i = 0; i < bestTrades.Count; i++)
+    {
+        Console.WriteLine(string.Concat("Exchange Timestamp: ", bestTrades[i].ExchangeName, " Amount sold: ", bestTrades[i].Amount, " BTC for ", bestTrades[i].Price, " EUR."));
+    }
+}
+Console.WriteLine("--- END TEST 1 ---");
+#endregion
+
+#region TEST 2
+#endregion
+
+#region TEST 3
+#endregion
+
+#region TEST 4
+#endregion
+Console.WriteLine("--- SELLING TESTS ---");
 #endregion
 
 Console.ReadKey();
