@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MetaExchange.OrderBook;
+using Type = MetaExchange.OrderBook.Type;
 
 namespace MetaExchangeAPI.Controllers
 {
@@ -8,7 +9,7 @@ namespace MetaExchangeAPI.Controllers
     public class MetaExchangeController : ControllerBase
     {
         [HttpGet("Trade")]
-        public IActionResult Trade(string type, decimal amount)
+        public IActionResult Trade(Type type, decimal amount)
         {
             string inputFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Input", "order_books_data.json");
             Transactions trade = new(inputFilePath);
@@ -24,7 +25,7 @@ namespace MetaExchangeAPI.Controllers
         }
 
         [HttpGet("BuyTest1")]
-        public IActionResult BuyTest1(string type = "buy", decimal amount = 4.20m)
+        public IActionResult BuyTest1(Type type = Type.Buy, decimal amount = 4.20m)
         {
             string inputFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Input", "test1.json");
             Transactions trade = new(inputFilePath);
@@ -41,7 +42,7 @@ namespace MetaExchangeAPI.Controllers
         }
 
         [HttpGet("BuyTest2")]
-        public IActionResult BuyTest2(string type = "buy", decimal amount = 4.20m)
+        public IActionResult BuyTest2(Type type = Type.Buy, decimal amount = 4.20m)
         {
             string inputFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Input", "test1.json");
             Transactions trade = new(inputFilePath);
@@ -58,7 +59,7 @@ namespace MetaExchangeAPI.Controllers
         }
 
         [HttpGet("BuyTest3")]
-        public IActionResult BuyTest3(string type = "buy", decimal amount = 4.20m)
+        public IActionResult BuyTest3(Type type = Type.Buy, decimal amount = 4.20m)
         {
             string inputFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Input", "test2.txt");
             Transactions trade = new(inputFilePath);
@@ -75,7 +76,7 @@ namespace MetaExchangeAPI.Controllers
         }
 
         [HttpGet("BuyTest4")]
-        public IActionResult BuyTest4(string type = "buy", decimal amount = 20.00m)
+        public IActionResult BuyTest4(Type type = Type.Buy, decimal amount = 20.00m)
         {
             string inputFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Input", "test2.txt");
             Transactions trade = new(inputFilePath);
@@ -92,7 +93,7 @@ namespace MetaExchangeAPI.Controllers
         }
 
         [HttpGet("SaleTest1")]
-        public IActionResult SaleTest1(string type = "sell", decimal amount = 1.50m)
+        public IActionResult SaleTest1(Type type = Type.Sell, decimal amount = 1.50m)
         {
             string inputFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Input", "test1.json");
             Transactions trade = new(inputFilePath);

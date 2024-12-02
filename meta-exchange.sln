@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35521.163 d17.12
+VisualStudioVersion = 17.12.35521.163
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetaExchangeAPI", "MetaExchangeAPI\MetaExchangeAPI.csproj", "{E12DE66F-52BC-4F6A-8020-9A937E747FF4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetaExchange", "MetaExchange\MetaExchange.csproj", "{3AA4CDDB-42D8-4990-839E-33708D361916}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetaExchange.Tests", "MetaExchange.Tests\MetaExchange.Tests.csproj", "{1812E5D8-2F32-4884-B7DE-3D2A20BB1EC2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{3AA4CDDB-42D8-4990-839E-33708D361916}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3AA4CDDB-42D8-4990-839E-33708D361916}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3AA4CDDB-42D8-4990-839E-33708D361916}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1812E5D8-2F32-4884-B7DE-3D2A20BB1EC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1812E5D8-2F32-4884-B7DE-3D2A20BB1EC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1812E5D8-2F32-4884-B7DE-3D2A20BB1EC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1812E5D8-2F32-4884-B7DE-3D2A20BB1EC2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
