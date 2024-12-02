@@ -1,6 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using MetaExchange.OrderBook;
 using System;
+using Type = MetaExchange.OrderBook.Type;
 
 #region BUYING TESTS
 Console.WriteLine("--- BUYING TESTS ---");
@@ -14,7 +15,7 @@ Transactions transactions = new(inputFilePath);
 // Init test EUR Balances
 List<(decimal, decimal)> predefinedBalances = new() { (190, 0), (112.5m, 0), (249, 0) };
 // call function
-var bestTrades = transactions.GetBestTrades("buy", 4.20m, predefinedBalances);
+var bestTrades = transactions.GetBestTrades(Type.Buy, 4.20m, predefinedBalances);
 // write out trades
 if (bestTrades.Count > 0)
 {
@@ -37,7 +38,7 @@ transactions = new(inputFilePath);
 // Init test EUR Balances
 predefinedBalances = new() { (190, 0), (650, 0), (249, 0) };
 // call function
-bestTrades = transactions.GetBestTrades("buy", 4.20m, predefinedBalances);
+bestTrades = transactions.GetBestTrades(Type.Buy, 4.20m, predefinedBalances);
 // write out trades
 if (bestTrades.Count > 0)
 {
@@ -60,7 +61,7 @@ transactions = new(inputFilePath);
 // Init test EUR Balances
 predefinedBalances = new() { (190, 0), (500, 0), (249, 0) };
 // call function
-bestTrades = transactions.GetBestTrades("buy", 4.20m, predefinedBalances);
+bestTrades = transactions.GetBestTrades(Type.Buy, 4.20m, predefinedBalances);
 // write out trades
 if (bestTrades.Count > 0)
 {
@@ -83,7 +84,7 @@ transactions = new(inputFilePath);
 // Init test EUR Balances
 predefinedBalances = new() { (100000, 0), (100000, 0), (100000, 0) };
 // call function
-bestTrades = transactions.GetBestTrades("buy", 20, predefinedBalances);
+bestTrades = transactions.GetBestTrades(Type.Buy, 20, predefinedBalances);
 // write out trades
 if (bestTrades.Count > 0)
 {
@@ -109,7 +110,7 @@ transactions = new(inputFilePath);
 // Init test EUR Balances
 predefinedBalances = new() { (190, 1.5m), (112.5m, 2), (249, 0) };
 // call function
-bestTrades = transactions.GetBestTrades("sell", 1.5m, predefinedBalances);
+bestTrades = transactions.GetBestTrades(Type.Sell, 1.5m, predefinedBalances);
 // write out trades
 if (bestTrades.Count > 0)
 {
@@ -137,7 +138,7 @@ Console.WriteLine("--- RANDOM TEST ---");
 inputFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Input", "order_books_data.json");
 transactions = new(inputFilePath);
 Console.WriteLine("--- SELLING ---");
-bestTrades = transactions.GetBestTrades("sell", 0.0002m);
+bestTrades = transactions.GetBestTrades(Type.Sell, 0.0002m);
 if (bestTrades.Count > 0)
 {
     for (int i = 0; i < bestTrades.Count; i++)
@@ -147,7 +148,7 @@ if (bestTrades.Count > 0)
 }
 Console.WriteLine("--- SELLING ---");
 Console.WriteLine("--- BUYING ---");
-bestTrades = transactions.GetBestTrades("buy", 5.0m);
+bestTrades = transactions.GetBestTrades(Type.Buy, 5.0m);
 if (bestTrades.Count > 0)
 {
     for (int i = 0; i < bestTrades.Count; i++)
