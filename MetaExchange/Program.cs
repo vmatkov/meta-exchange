@@ -108,7 +108,7 @@ inputFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Input", "te
 // Init CryptoExchanges and OrderBooks
 transactions = new(inputFilePath);
 // Init test EUR Balances
-predefinedBalances = new() { (190, 1.5m), (112.5m, 2), (249, 0) };
+predefinedBalances = new() { (190, 0), (112.5m, 0), (249, 0.5m) };
 // call function
 bestTrades = transactions.GetBestTrades(Type.Sell, 1.5m, predefinedBalances);
 // write out trades

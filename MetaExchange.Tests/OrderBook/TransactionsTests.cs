@@ -118,7 +118,7 @@ namespace MetaExchange.Tests.OrderBook
             List<(decimal, decimal)> predefinedBalances = new() { (0, 0), (0, 0), (0, 0.5m) };
 
             //Act
-            var result = transactions.GetBestTrades(Type.Sell, 0.50m, predefinedBalances);
+            var result = transactions.GetBestTrades(Type.Sell, 1.50m, predefinedBalances);
             var expectedResult = new List<(string, decimal, decimal)>
             {
                 ("2024-11-27T15:22:00.2518856Z", 800m, 0.5m)

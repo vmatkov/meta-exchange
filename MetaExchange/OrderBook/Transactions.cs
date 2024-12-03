@@ -122,8 +122,17 @@ namespace MetaExchange.OrderBook
                         if (remainingAmount <= 0) break;
 
                         var sellingAmount = Math.Min(remainingAmount, bid.AvailableBtc);
-                        if (sellingAmount > 0 && bid.Exchange.BtcBalance > 0)
+                        var affordable = bid.Exchange.BtcBalance > sellingAmount;
+
+                        if (affordable && sellingAmount > 0 && bid.Exchange.BtcBalance > 0)
                         {
+                            result.Add((bid.ExchangeName, bid.Price * sellingAmount, sellingAmount));
+                            bid.Exchange.BtcBalance -= sellingAmount;
+                            remainingAmount -= sellingAmount;
+                        }
+                        else if(!affordable && sellingAmount > 0 && bid.Exchange.BtcBalance > 0)
+                        {
+                            sellingAmount = bid.Exchange.BtcBalance;
                             result.Add((bid.ExchangeName, bid.Price * sellingAmount, sellingAmount));
                             bid.Exchange.BtcBalance -= sellingAmount;
                             remainingAmount -= sellingAmount;
